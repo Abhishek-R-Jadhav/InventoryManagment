@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Edit Supplier</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="javascript/cities.js"></script>
+  </head>
+  <body>
+    <!--navbar-->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="px-5 container-fluid">
+          <a class="navbar-brand" href="/">INVENTORY</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Masters
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/supplier">Supplier Master</a></li>
+                  <li><a class="dropdown-item" href="/customer">Customer Master</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/purchase">Purchase</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/sales">Sales</a>
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <!--navbar end-->
+
+    <div class="text-center">
+      <div class="container">
+        <div class="row">
+          <!--form-->
+          <div class="col-lg-4 mx-auto">
+            <form th:action="@{/save}" method="post" th:object="${supplier}">
+
+              <div class="row">
+                <div class="col-lg-4">
+                  <label for="exampleInputEmail1" class="form-label">Id</label>
+                  <input type="text" class="form-control" id="s_id" name="id" th:value="${supplier.id}">
+                </div>
+                <div class="mb-3 col-lg-8">
+                  <label for="exampleInputPassword1" class="form-label">GST No:</label>
+                  <input type="text" class="form-control" id="gstn" name="gstNo" th:value="${supplier.gstNo}">
+                </div>
+              </div>
+    
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Name</label>
+                <input type="text" class="form-control" id="s_name" name="name" th:value="${supplier.name}">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Address</label>
+                <textarea type="text" class="form-control" name="address" cols="2" rows="5">[[${supplier.address}]]</textarea>
+              </div>
+              <div class="row mt-3">
+                <div class="col-lg-6">
+                  <label class="form-label">Pin Code</label>
+                  <input type="text" class="form-control" name="pincode" placeholder="Enter Pin Code" th:value="${supplier.pincode}">
+                </div>
+                <div class="col-lg-6">
+                  <label class="form-label">Phone No</label>
+                  <input type="text" class="form-control" name="phone" placeholder="Enter Phone number" th:value="${supplier.phone}">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary mt-3">Submit</button>
+            </form>
+          </div>
+          <!--form end-->
+        </div>
+      </div>
+    </div>
+
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        const cityData = {
+    "Andhra Pradesh": ["Adoni","Amaravati","Anantapur","Chandragiri","Chittoor","Dowlaiswaram","Eluru","Guntur","Kadapa","Kakinada","Kurnool","Machilipatnam","Nagarjunakoṇḍa","Rajahmundry","Srikakulam","Tirupati","Vijayawada","Visakhapatnam","Vizianagaram","Yemmiganur"],
+    "Arunachal Pradesh": ["Itanagar", "Naharlagun", "Pasighat", "Tawang"],
+    "Assam": ["Dhuburi","Dibrugarh","Dispur","Guwahati","Jorhat","Nagaon","Sivasagar","Silchar","Tezpur","Tinsukia"],
+    "Bihar": ["Ara","Barauni","Begusarai","Bettiah","Bhagalpur","Bihar Sharif","Bodh Gaya","Buxar","Chapra","Darbhanga","Dehri","Dinapur Nizamat","Gaya","Hajipur","Jamalpur","Katihar","Madhubani","Motihari","Munger","Muzaffarpur","Patna","Purnia","Pusa","Saharsa","Samastipur","Sasaram","Sitamarhi","Siwan"],
+    "Chhattisgarh": ["Raipur", "Bhilai", "Bilaspur", "Korba"],
+    "Goa": ["Panaji", "Margao", "Vasco da Gama", "Mapusa"],
+    "Gujarat": ["Ahmedabad", "Surat", "Vadodara", "Rajkot"],
+    "Haryana": ["Faridabad", "Gurgaon", "Panipat", "Ambala"],
+    "Himachal Pradesh": ["Shimla", "Mandi", "Solan", "Dharamshala"],
+    "Jharkhand": ["Ranchi", "Jamshedpur", "Dhanbad", "Bokaro"],
+    "Karnataka": ["Bangalore", "Mysore", "Hubli", "Mangalore"],
+    "Kerala": ["Thiruvananthapuram", "Kochi", "Kozhikode", "Thrissur"],
+    "Madhya Pradesh": ["Indore", "Bhopal", "Jabalpur", "Gwalior"],
+    "Maharashtra": ["Mumbai", "Pune", "Nagpur", "Nashik","Satara"],
+    "Manipur": ["Imphal", "Thoubal", "Kakching", "Ukhrul"],
+    "Meghalaya": ["Shillong", "Tura", "Jowai", "Baghmara"],
+    "Mizoram": ["Aizawl", "Lunglei", "Champhai", "Serchhip"],
+    "Nagaland": ["Kohima", "Dimapur", "Mokokchung", "Tuensang"],
+    "Odisha": ["Bhubaneswar", "Cuttack", "Rourkela", "Berhampur"],
+    "Punjab": ["Ludhiana", "Amritsar", "Jalandhar", "Patiala"],
+    "Rajasthan": ["Jaipur", "Jodhpur", "Udaipur", "Kota"],
+    "Sikkim": ["Gangtok", "Namchi", "Geyzing", "Mangan"],
+    "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai", "Tiruchirappalli"],
+    "Telangana": ["Hyderabad", "Warangal", "Nizamabad", "Karimnagar"],
+    "Tripura": ["Agartala", "Dharmanagar", "Kailashahar", "Udaipur"],
+    "Uttar Pradesh": ["Lucknow", "Kanpur", "Varanasi", "Agra"],
+    "Uttarakhand": ["Dehradun", "Haridwar", "Rishikesh", "Nainital"],
+    "West Bengal": ["Kolkata", "Asansol", "Siliguri", "Durgapur"]
+  };
+
+  function populateCities() {
+    const stateSelect = document.getElementById("state");
+    const citySelect = document.getElementById("city");
+    const selectedState = stateSelect.value;
+
+    // Clear previous options
+    citySelect.innerHTML = '<option value="">Select City</option>';
+
+    // Populate cities based on selected state
+    if (selectedState && cityData[selectedState]) {
+      cityData[selectedState].forEach(city => {
+        const option = document.createElement("option");
+        option.textContent = city;
+        option.value = city;
+        citySelect.appendChild(option);
+      });
+    }
+  }
+    </script>
+  </body>
+</html>
+
+ <!--form-->
+ 
+  <!--form end-->
