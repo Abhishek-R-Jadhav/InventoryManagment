@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Menu List</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font Awesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+<div class="main">
+<main>
+<div class="container mt-4 px-3 px-md-5">
+<!-- Header -->
+<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+<h2 class="mb-0">Menu</h2>
+<a class="btn btn-primary" href="/menu/add">Add New Menu</a>
+</div>
+<!-- Search Bar -->
+<div class="mb-3">
+<div class="input-group">
+<input class="form-control" id="searchInput" onkeyup="filterMenus()" placeholder="Search by Menu Name..." type="text"/>
+<button class="btn btn-outline-secondary" onclick="clearSearch()" type="button">X</button>
+</div>
+</div>
+<!-- SweetAlert Message -->
+<div th:if="${successMessage}">
+<script>
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: /*[[${successMessage}]]*/ 'Menu updated successfully!',
+                            timer: 5000,
+                            showConfirmButton: false
+                        });
+                    </script>
+</div>
+<!-- Menu Table -->
+<div class="table-responsive">
+<table class="table table-bordered table-striped">
+<thead class="table-dark">
+<tr>
+<th>ID</th>
+<th>Title</th>
+<th>Description</th>
+<th>Price</th>
+<th>Category</th>
+<th>Images</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td class="menu-name">Classic Italian Pizza</td>
+  <td>pizza with some souces, spices and vegetables</td>
+  <td>₹ 299</td>
+  <td>Pizza</td>
+  <td>
+    <img alt="Pizza" class="img-fluid rounded" loading="lazy"
+         style="width: 60px; height: 60px; object-fit: cover;"
+         src="https://static.vecteezy.com/system/resources/thumbnails/026/543/963/small/stock-of-pizza-in-kitchen-table-bird-view-ai-generated-photo.jpg"/>
+  </td>
+  <td>
+    <div class="d-flex flex-column gap-2">
+      <a class="btn btn-warning btn-sm w-100 text-nowrap"
+         onclick="openEditPage(this)"
+         data-id="1"
+         data-title="Classic Italian Pizza"
+         data-description="pizza with some souces, spices and vegetables"
+         data-price="299"
+         data-category="Pizza"
+         data-image="https://static.vecteezy.com/system/resources/thumbnails/026/543/963/small/stock-of-pizza-in-kitchen-table-bird-view-ai-generated-photo.jpg">Edit</a>
+      <a class="btn btn-danger btn-sm w-100 text-nowrap" onclick="return confirm('Are you sure?')">Delete</a>
+    </div>
+  </td>
+</tr>
+
+<tr>
+  <td>2</td>
+  <td class="menu-name">Cold Coffee</td>
+  <td>Chilled coffee with milk and ice</td>
+  <td>₹ 35</td>
+  <td>Drinks</td>
+  <td>
+    <img alt="Cold Coffee" class="img-fluid rounded" loading="lazy"
+         style="width: 60px; height: 60px; object-fit: cover;"
+         src="https://static.vecteezy.com/system/resources/thumbnails/034/222/022/small_2x/pumpkin-spice-latte-iced-coffee-background-generative-ai-free-photo.jpg"/>
+  </td>
+  <td>
+    <div class="d-flex flex-column gap-2">
+      <a class="btn btn-warning btn-sm w-100 text-nowrap"
+         onclick="openEditPage(this)"
+         data-id="2"
+         data-title="Cold Coffee"
+         data-description="Chilled coffee with milk and ice"
+         data-price="35"
+         data-category="Drinks"
+         data-image="https://static.vecteezy.com/system/resources/thumbnails/034/222/022/small_2x/pumpkin-spice-latte-iced-coffee-background-generative-ai-free-photo.jpg">Edit</a>
+      <a class="btn btn-danger btn-sm w-100 text-nowrap" onclick="return confirm('Are you sure?')">Delete</a>
+    </div>
+  </td>
+</tr>
+
+<tr>
+  <td>3</td>
+  <td class="menu-name">Sandwich</td>
+  <td>Club sandwich with ham, cheese, tomato</td>
+  <td>₹ 30</td>
+  <td>Snacks</td>
+  <td>
+    <img alt="Sandwich" class="img-fluid rounded" loading="lazy"
+         style="width: 60px; height: 60px; object-fit: cover;"
+         src="https://static.vecteezy.com/system/resources/thumbnails/008/081/420/small_2x/club-sandwich-with-ham-cheese-tomato-salad-and-chips-photo.jpg"/>
+  </td>
+  <td>
+    <div class="d-flex flex-column gap-2">
+      <a class="btn btn-warning btn-sm w-100 text-nowrap"
+         onclick="openEditPage(this)"
+         data-id="3"
+         data-title="Sandwich"
+         data-description="Club sandwich with ham, cheese, tomato"
+         data-price="30"
+         data-category="Snacks"
+         data-image="https://static.vecteezy.com/system/resources/thumbnails/008/081/420/small_2x/club-sandwich-with-ham-cheese-tomato-salad-and-chips-photo.jpg">Edit</a>
+      <a class="btn btn-danger btn-sm w-100 text-nowrap" onclick="return confirm('Are you sure?')">Delete</a>
+    </div>
+  </td>
+</tr>
+
+<tr>
+  <td>4</td>
+  <td class="menu-name">Burger</td>
+  <td>Juicy cheeseburger with toppings</td>
+  <td>₹ 70</td>
+  <td>Snacks</td>
+  <td>
+    <img alt="Burger" class="img-fluid rounded" loading="lazy"
+         style="width: 60px; height: 60px; object-fit: cover;"
+         src="https://static.vecteezy.com/system/resources/thumbnails/023/779/340/small_2x/big-and-tasty-cheese-burger-on-black-background-with-copy-space-for-your-text-food-poster-generative-ai-photo.jpg"/>
+  </td>
+  <td>
+    <div class="d-flex flex-column gap-2">
+      <a class="btn btn-warning btn-sm w-100 text-nowrap"
+         onclick="openEditPage(this)"
+         data-id="4"
+         data-title="Burger"
+         data-description="Juicy cheeseburger with toppings"
+         data-price="70"
+         data-category="Snacks"
+         data-image="https://static.vecteezy.com/system/resources/thumbnails/023/779/340/small_2x/big-and-tasty-cheese-burger-on-black-background-with-copy-space-for-your-text-food-poster-generative-ai-photo.jpg">Edit</a>
+      <a class="btn btn-danger btn-sm w-100 text-nowrap" onclick="return confirm('Are you sure?')">Delete</a>
+    </div>
+  </td>
+</tr>
+
+<tr>
+  <td>5</td>
+  <td class="menu-name">French Fries</td>
+  <td>Crispy golden potato fries</td>
+  <td>₹ 30</td>
+  <td>Snacks</td>
+  <td>
+    <img alt="Fries" class="img-fluid rounded" loading="lazy"
+         style="width: 60px; height: 60px; object-fit: cover;"
+         src="https://static.vecteezy.com/system/resources/thumbnails/027/536/411/small_2x/delicious-french-fries-on-a-white-background-photo.jpg"/>
+  </td>
+  <td>
+    <div class="d-flex flex-column gap-2">
+      <a class="btn btn-warning btn-sm w-100 text-nowrap"
+         onclick="openEditPage(this)"
+         data-id="5"
+         data-title="French Fries"
+         data-description="Crispy golden potato fries"
+         data-price="30"
+         data-category="Snacks"
+         data-image="https://static.vecteezy.com/system/resources/thumbnails/027/536/411/small_2x/delicious-french-fries-on-a-white-background-photo.jpg">Edit</a>
+      <a class="btn btn-danger btn-sm w-100 text-nowrap" onclick="return confirm('Are you sure?')">Delete</a>
+    </div>
+  </td>
+</tr>
+
+<tr>
+  <td>6</td>
+  <td class="menu-name">Paneer Roll</td>
+  <td>Delicious paneer tikka roll</td>
+  <td>₹ 60</td>
+  <td>Snacks</td>
+  <td>
+    <img alt="Roll" class="img-fluid rounded" loading="lazy"
+         style="width: 60px; height: 60px; object-fit: cover;"
+         src="https://static.vecteezy.com/system/resources/thumbnails/052/824/999/small_2x/chicken-shawarma-plated-on-a-rustic-wooden-board-free-photo.jpg"/>
+  </td>
+  <td>
+    <div class="d-flex flex-column gap-2">
+      <a class="btn btn-warning btn-sm w-100 text-nowrap"
+         onclick="openEditPage(this)"
+         data-id="6"
+         data-title="Paneer Roll"
+         data-description="Delicious paneer tikka roll"
+         data-price="60"
+         data-category="Snacks"
+         data-image="https://static.vecteezy.com/system/resources/thumbnails/052/824/999/small_2x/chicken-shawarma-plated-on-a-rustic-wooden-board-free-photo.jpg">Edit</a>
+      <a class="btn btn-danger btn-sm w-100 text-nowrap" onclick="return confirm('Are you sure?')">Delete</a>
+    </div>
+  </td>
+</tr>
+
+<tr>
+  <td>7</td>
+  <td class="menu-name">Coke</td>
+  <td>Chilled Coca-Cola bottle</td>
+  <td>₹ 25</td>
+  <td>Drinks</td>
+  <td>
+    <img alt="Coke" class="img-fluid rounded" loading="lazy"
+         style="width: 60px; height: 60px; object-fit: cover;"
+         src="https://static.vecteezy.com/system/resources/thumbnails/030/213/249/small_2x/of-a-coca-cola-drink-isolated-on-black-background-generative-ai-photo.jpg"/>
+  </td>
+  <td>
+    <div class="d-flex flex-column gap-2">
+      <a class="btn btn-warning btn-sm w-100 text-nowrap"
+         onclick="openEditPage(this)"
+         data-id="7"
+         data-title="Coke"
+         data-description="Chilled Coca-Cola bottle"
+         data-price="25"
+         data-category="Drinks"
+         data-image="https://static.vecteezy.com/system/resources/thumbnails/030/213/249/small_2x/of-a-coca-cola-drink-isolated-on-black-background-generative-ai-photo.jpg">Edit</a>
+      <a class="btn btn-danger btn-sm w-100 text-nowrap" onclick="return confirm('Are you sure?')">Delete</a>
+    </div>
+  </td>
+</tr>
+
+<tr>
+  <td>8</td>
+  <td class="menu-name">Lemon Tea</td>
+  <td>Hot lemon tea served in cup</td>
+  <td>₹ 20</td>
+  <td>Drinks</td>
+  <td>
+    <img alt="Lemon Tea" class="img-fluid rounded" loading="lazy"
+         style="width: 60px; height: 60px; object-fit: cover;"
+         src="https://static.vecteezy.com/system/resources/thumbnails/046/421/100/small_2x/tea-with-lemon-in-a-cup-photo.jpg"/>
+  </td>
+  <td>
+    <div class="d-flex flex-column gap-2">
+      <a class="btn btn-warning btn-sm w-100 text-nowrap"
+         onclick="openEditPage(this)"
+         data-id="8"
+         data-title="Lemon Tea"
+         data-description="Hot lemon tea served in cup"
+         data-price="20"
+         data-category="Drinks"
+         data-image="https://static.vecteezy.com/system/resources/thumbnails/046/421/100/small_2x/tea-with-lemon-in-a-cup-photo.jpg">Edit</a>
+      <a class="btn btn-danger btn-sm w-100 text-nowrap" onclick="return confirm('Are you sure?')">Delete</a>
+    </div>
+  </td>
+</tr>
+
+</tbody>
+</table>
+<!-- Pagination -->
+<div class="mt-3 d-flex justify-content-center">
+<nav>
+<ul class="pagination">
+<li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+<a class="page-link" th:href="@{/menu(page=${currentPage - 1})}">Previous</a>
+</li>
+<li class="page-item" th:classappend="${currentPage == i} ? 'active'" th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+<a class="page-link" th:href="@{/menu(page=${i})}" th:text="${i + 1}"></a>
+</li>
+<li class="page-item" th:classappend="${currentPage + 1 == totalPages} ? 'disabled'">
+<a class="page-link" th:href="@{/menu(page=${currentPage + 1})}">Next</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div> <!-- /container -->
+</main>
+</div>
+<!-- Bootstrap JS -->
+<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Sidebar Toggle Script -->
+<script>
+    document.getElementById("sidebarToggle").addEventListener("click", function () {
+        document.getElementById("sidebar").classList.toggle("collapsed");
+    });
+</script>
+<!-- Search Filter Script -->
+<script>
+    function filterMenus() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let rows = document.querySelectorAll("table tbody tr");
+
+        rows.forEach(row => {
+            let name = row.querySelector(".menu-name").textContent.toLowerCase();
+            row.style.display = name.includes(input) ? "" : "none";
+        });
+    }
+
+    function clearSearch() {
+        document.getElementById("searchInput").value = "";
+        filterMenus();
+    }
+</script>
+
+<!-- Footer -->
+<div class="footer-nav" onclick="event.stopPropagation()">
+        <div class="nav-item" onclick="setActive(this); location.href='/dashboard'" data-path="/dashboard">
+            <i class="fas fa-home"></i>
+            <div class="nav-label">Home</div>
+        </div>
+
+        <div class="nav-item" onclick="setActive(this); location.href='/api/orders'" data-path="/api/orders">
+            <i class="fas fa-box-open"></i>
+            <div class="nav-label">Orders</div>
+        </div>
+
+        <div class="nav-item" onclick="setActive(this); location.href='/menu'" data-path="/menu">
+            <i class="fas fa-utensils"></i>
+            <div class="nav-label">Menus</div>
+        </div>
+
+        <div class="nav-item" onclick="setActive(this); location.href='/tables'">
+            <i class="fas fa-chair"></i>
+            <div class="nav-label">Tables</div>
+        </div>
+
+        <div class="nav-item auth" onclick="toggleAuthDropdown(event)">
+            <i class="fas fa-user-lock"></i>
+            <div class="nav-label">Auth</div>
+            <div class="dropdown-content" id="authDropdown">
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
+            </div>
+        </div>
+    </div>
+<!-- Scripts -->
+    <script>
+        function filterOrders() {
+            let input = document.getElementById("searchInput").value.toLowerCase();
+            let rows = document.querySelectorAll("#ordersTable tbody tr");
+            rows.forEach(row => {
+                let name = row.querySelector(".customer-name").textContent.toLowerCase();
+                row.style.display = name.includes(input) ? "" : "none";
+            });
+            document.getElementById("clearSearch").style.display = input ? "block" : "none";
+        }
+
+        function clearSearch() {
+            document.getElementById("searchInput").value = "";
+            filterOrders();
+        }
+
+           function setActive(element) {
+        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+        element.classList.add('active');
+        if (!element.classList.contains('auth')) {
+            document.getElementById("authDropdown").classList.remove("show");
+        }
+    }
+
+    function toggleAuthDropdown(event) {
+        event.stopPropagation();
+        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+        document.getElementById("authDropdown").classList.toggle("show");
+    }
+
+    // Dynamically mark active nav based on current path
+    window.addEventListener("DOMContentLoaded", () => {
+        const path = window.location.pathname;
+        const navItems = document.querySelectorAll(".nav-item[data-path]");
+        let matched = false;
+
+        navItems.forEach(item => {
+            if (path.startsWith(item.getAttribute("data-path"))) {
+                item.classList.add("active");
+                matched = true;
+            }
+        });
+
+        // Optional: fallback if no match
+        if (!matched && path === "/") {
+            document.querySelector('.nav-item[data-path="/dashboard"]')?.classList.add("active");
+        }
+    });
+
+    // Close auth dropdown on outside click
+    window.addEventListener("click", () => {
+        document.getElementById("authDropdown").classList.remove("show");
+    });
+    </script>
+
+    <script>
+function openEditPage(btn) {
+  const id = btn.dataset.id;
+  const title = encodeURIComponent(btn.dataset.title);
+  const desc = encodeURIComponent(btn.dataset.description);
+  const price = encodeURIComponent(btn.dataset.price);
+  const cat = encodeURIComponent(btn.dataset.category);
+  const img = encodeURIComponent(btn.dataset.image);
+
+  const url = `edit.html?id=${id}&title=${title}&desc=${desc}&price=${price}&cat=${cat}&img=${img}`;
+  location.href = url;
+}
+</script>
+
+</body>
+</html>
