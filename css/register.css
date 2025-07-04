@@ -1,0 +1,68 @@
+    body, html {
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .bg-image {
+      background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1470&q=80');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      position: relative;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .register-container {
+      position: relative;
+      z-index: 2;
+      background-color: #ffffffdd;
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.25);
+      max-width: 500px;
+      width: 80%;
+      margin: auto;
+    }
+
+    .register-title {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.2rem;
+      color: #ff5722;
+    }
+
+    .form-control:focus {
+      box-shadow: 0 0 0 0.2rem rgba(255, 87, 34, 0.25);
+      border-color: #ff5722;
+    }
+
+    .btn-primary {
+      background-color: #ff5722;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #e64a19;
+    }
+
+    .form-text a {
+      color: #ff5722;
+      text-decoration: none;
+    }
+
+    .social-icons i {
+      font-size: 1.5rem;
+      color: #fff;
+      margin: 0 10px;
+      transition: transform 0.2s;
+    }
+
+    .social-icons i:hover {
+      transform: scale(1.2);
+    }
