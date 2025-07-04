@@ -14,7 +14,7 @@ function loadCart() {
     cart.forEach((item, index) => {
         total += item.price * item.quantity;
         cartItems.innerHTML += `
-            <li class="list-group-item d-flex justify-content-between align-items-center">
+            <li class="list-group-item d-flex justify-content-center align-items-center">
                 <div>
                     <strong>${item.name}</strong><br>
                     <button class="btn btn-sm btn-danger" onclick="updateQty(${item.id}, -1)">-</button>
@@ -76,6 +76,6 @@ function proceedToCheckout() {
         timer: 2000,
         showConfirmButton: false
     }).then(() => {
-        window.location.href = window.location.href = "/inventoryManagment/customer/status.html";
+        window.location.href = window.location.href = "inventoryManagment/customer/status.html";
     });
 }
