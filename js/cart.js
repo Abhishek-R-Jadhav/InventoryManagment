@@ -76,6 +76,6 @@ function proceedToCheckout() {
         timer: 2000,
         showConfirmButton: false
     }).then(() => {
-        window.location.href = "customer/status.html";
+        window.location.href = window.location.href = "/inventoryManagment/customer/status.html";
     });
 }
