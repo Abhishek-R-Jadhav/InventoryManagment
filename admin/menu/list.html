@@ -273,7 +273,7 @@
 <a class="page-link" th:href="@{/menu(page=${currentPage - 1})}">Previous</a>
 </li>
 <li class="page-item" th:classappend="${currentPage == i} ? 'active'" th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
-<a class="page-link" th:href="@{/menu(page=${i})}" th:text="${i + 1}"></a>
+<a class="page-link" th:href="@{/menu(page=${i})}" th:text="${i + 1}">1</a>
 </li>
 <li class="page-item" th:classappend="${currentPage + 1 == totalPages} ? 'disabled'">
 <a class="page-link" th:href="@{/menu(page=${currentPage + 1})}">Next</a>
