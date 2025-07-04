@@ -103,12 +103,12 @@
 
 <!-- Footer Nav -->
 <div class="footer-nav" onclick="event.stopPropagation()">
-        <div class="nav-item" onclick="setActive(this); location.href='../admin/dashboard.html'">
+        <div class="nav-item" onclick="setActive(this); location.href='../admin/dashboard.html'" data-path="../admin/dashboard.html">
             <i class="fas fa-home"></i>
             <div class="nav-label">Home</div>
         </div>
 
-        <div class="nav-item" onclick="setActive(this); location.href='../admin/adminOrders.html'">
+        <div class="nav-item" onclick="setActive(this); location.href='../admin/adminOrders.html'" data-path="../admin/adminOrders.html">
             <i class="fas fa-box-open"></i>
             <div class="nav-label">Orders</div>
         </div>
@@ -118,7 +118,7 @@
             <div class="nav-label">Menus</div>
         </div>
 
-        <div class="nav-item" setActive(this) location.href='list.html'" data-path="list.html">
+        <div class="nav-item" onClick="setActive(this) location.href='list.html'" data-path="list.html">
             <i class="fas fa-chair"></i>
             <div class="nav-label">Tables</div>
         </div>
