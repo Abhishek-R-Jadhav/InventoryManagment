@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurant Tables</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Optional Custom CSS -->
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+
+<div class="main">
+    <main>
+        <div class="container mt-4 px-3 px-md-5">
+            <!-- Header -->
+            <div class="d-flex justify-content-between align-items-center mb-3 flex-nowrap">
+                <h2 class="mb-0 flex-grow-1">Restaurant Tables</h2>
+                <a href="/table/form.html" class="btn btn-primary ms-3">Add Table</a>
+            </div>
+
+
+            <!-- Tables Table -->
+           <div class="table-responsive">
+    <table class="table table-bordered table-striped align-middle text-center">
+        <thead class="table-dark">
+            <tr>
+                <th class="col-1">ID</th>
+                <th class="col-3">Table Number</th>
+                <th class="col-2">QR Code</th>
+                <th class="col-2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="table : ${tables}">
+                <td th:text="${table.id}">1</td>
+                <td th:text="${table.tableNumber}">2</td>
+                <td>
+                    <img src="../qrcodes/Table_4.png" class="img-fluid rounded" style="max-width: 60px;" alt="QR Code">
+                </td>
+                <td>
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-1">
+                        <a th:href="@{'/tables/edit/' + ${table.id}}" class="btn btn-sm btn-warning">Edit</a>
+                        <a th:href="@{'/tables/delete/' + ${table.id}}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                    </div>
+                </td>
+            </tr>
+
+            <tr th:each="table : ${tables}">
+                <td th:text="${table.id}">2</td>
+                <td th:text="${table.tableNumber}">3</td>
+                <td>
+                    <img src="../qrcodes/Table_5.png" class="img-fluid rounded" style="max-width: 60px;" alt="QR Code">
+                </td>
+                <td>
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-1">
+                        <a th:href="@{'/tables/edit/' + ${table.id}}" class="btn btn-sm btn-warning">Edit</a>
+                        <a th:href="@{'/tables/delete/' + ${table.id}}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                    </div>
+                </td>
+            </tr>
+
+            <tr th:each="table : ${tables}">
+                <td th:text="${table.id}">3</td>
+                <td th:text="${table.tableNumber}">4</td>
+                <td>
+                    <img src="../qrcodes/Table_7.png" class="img-fluid rounded" style="max-width: 60px;" alt="QR Code">
+                </td>
+                <td>
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-1">
+                        <a th:href="@{'/tables/edit/' + ${table.id}}" class="btn btn-sm btn-warning">Edit</a>
+                        <a th:href="@{'/tables/delete/' + ${table.id}}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                    </div>
+                </td>
+            </tr>
+
+            <tr th:each="table : ${tables}">
+                <td th:text="${table.id}">4</td>
+                <td th:text="${table.tableNumber}">5</td>
+                <td>
+                    <img src="../qrcodes/Table_8.png" class="img-fluid rounded" style="max-width: 60px;" alt="QR Code">
+                </td>
+                <td>
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-1">
+                        <a th:href="@{'/tables/edit/' + ${table.id}}" class="btn btn-sm btn-warning">Edit</a>
+                        <a th:href="@{'/tables/delete/' + ${table.id}}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+        </div>
+    </main>
+</div>
+
+<!-- Footer Nav -->
+<div class="footer-nav" onclick="event.stopPropagation()">
+        <div class="nav-item" onclick="setActive(this); location.href='/admin/dashboard.html'" data-path="/admin/dashboard.html">
+            <i class="fas fa-home"></i>
+            <div class="nav-label">Home</div>
+        </div>
+
+        <div class="nav-item" onclick="setActive(this); location.href='/admin/adminOrders.html'" data-path="/admin/adminOrders.html">
+            <i class="fas fa-box-open"></i>
+            <div class="nav-label">Orders</div>
+        </div>
+
+        <div class="nav-item" onclick="setActive(this); location.href='/admin/menu/list.html'">
+            <i class="fas fa-utensils"></i>
+            <div class="nav-label">Menus</div>
+        </div>
+
+        <div class="nav-item" onclick="setActive(this); location.href='/table/list.html'" data-path="/table/list.html">
+            <i class="fas fa-chair"></i>
+            <div class="nav-label">Tables</div>
+        </div>
+
+        <div class="nav-item auth" onclick="toggleAuthDropdown(event)">
+            <i class="fas fa-user-lock"></i>
+            <div class="nav-label">Auth</div>
+            <div class="dropdown-content" id="authDropdown">
+                <a href="/admin/login.html">Login</a>
+                <a href="/admin/register.html">Register</a>
+            </div>
+        </div>
+    </div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+<!-- Footer Nav Script -->
+<script>
+    function setActive(element) {
+        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+        element.classList.add('active');
+        if (!element.classList.contains('auth')) {
+            document.getElementById("authDropdown").classList.remove("show");
+        }
+    }
+
+    function toggleAuthDropdown(event) {
+        event.stopPropagation();
+        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+        document.getElementById("authDropdown").classList.toggle("show");
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+        const path = window.location.pathname;
+        const navItems = document.querySelectorAll(".nav-item[data-path]");
+        let matched = false;
+
+        navItems.forEach(item => {
+            if (path.startsWith(item.getAttribute("data-path"))) {
+                item.classList.add("active");
+                matched = true;
+            }
+        });
+
+        if (!matched && path === "/") {
+            document.querySelector('.nav-item[data-path="/dashboard"]')?.classList.add("active");
+        }
+    });
+
+    window.addEventListener("click", () => {
+        document.getElementById("authDropdown").classList.remove("show");
+    });
+</script>
+</body>
+</html>

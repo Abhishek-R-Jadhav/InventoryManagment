@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <!-- Fonts and CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dongle&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="/css/arMenus.css" rel="stylesheet">
+    <link href="/css/deleteAlert.css" rel="stylesheet">
+
+    <!-- JS Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<div class="background-wrapper">
+    <img src="/images/backgroundImage/foodSketch.jpg" alt="Background" class="background-image" />
+</div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg sticky-top" id="logoName" style="background-color: #50312c;">
+    <div class="container-fluid">
+        <a class="navbar-brand pacifoText logoName" style="cursor: pointer;">Restaurant Cart</a>
+    </div>
+</nav>
+
+<!-- Cart Section -->
+<div class="container mt-4 mb-5 pb-5" id="cartSection">
+    <h3>Your Cart</h3>
+    <ul class="list-group" id="cartItems"></ul>
+    <h4 class="mt-3">Total: ₹<span id="cartTotal">0</span></h4>
+
+    <div class="mt-3">
+        <label for="paymentMethod"><strong>Select Payment Method:</strong></label>
+        <select id="paymentMethod" class="form-select">
+            <option value="">-- Choose Payment Option --</option>
+            <option value="cash">Cash</option>
+            <option value="online">Online Payment</option>
+        </select>
+    </div>
+
+    <div id="qrSection" style="display: none;">
+        <h4>Enter Amount for Online Payment:</h4>
+        <input type="number" id="amount" placeholder="Enter Amount in ₹" class="form-control mb-3">
+        <button class="btn btn-success" onclick="generateQR()">Create QR Code</button>
+        <div id="qrContainer" style="display: none; margin-top: 20px;">
+            <h3>Scan to Pay</h3>
+            <img id="qrCode" src="" alt="Google Pay QR Code" class="img-fluid">
+        </div>
+    </div>
+
+    <button class="btn btn-success mt-3" onclick="proceedToCheckout()" id="btn-checkout">Checkout</button>
+</div>
+
+<!-- Footer Nav -->
+<div class="footer-nav d-flex justify-content-around text-center bg-light p-2 border-top fixed-bottom">
+    <div class="nav-item">
+        <a href="/customer/menu1.html" class="text-dark text-decoration-none">
+            <i class="fas fa-utensils fa-lg"></i>
+            <div class="nav-label">Menu</div>
+        </a>
+    </div>
+    <div class="nav-item">
+        <a href="/customer/cart.html" class="text-dark text-decoration-none">
+            <i class="fas fa-shopping-bag fa-lg"></i>
+            <div class="nav-label">Cart</div>
+        </a>
+    </div>
+    <div class="nav-item">
+        <a href="/customer/status.html" class="text-dark text-decoration-none">
+            <i class="fas fa-clock fa-lg"></i>
+            <div class="nav-label">Status</div>
+        </a>
+    </div>
+</div>
+
+<script src="/js/cart.js"></script>
+</body>
+</html>
